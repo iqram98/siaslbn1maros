@@ -11,9 +11,11 @@ class Dashboard extends CI_Controller
 	{
 		parent::__construct();
 		logged_in();
+		$this->load->model('sisfo/Dashboard_model');
 		$this->data['user'] = user();
 		$this->data['menus'] = navMenu();
-		$this->load->model('sisfo/Dashboard_model');
+		$this->data['statistik'] = $this->Dashboard_model->statistik();
+
 
 	}
 	
@@ -24,7 +26,6 @@ class Dashboard extends CI_Controller
 		$data['page'] = 'dashboard/index';
 		$data['jumlahSiswa'] = $this->Dashboard_model->jumlahSiswa();
 		$data['jumlahGuru'] = $this->Dashboard_model->jumlahGuru();
-		$data['statistik'] = $this->Dashboard_model->statistik();
 
 		$this->load->view('templates/wrapper', $data);
 	}

@@ -31,6 +31,7 @@ class Asesmen_model extends CI_Model
 
 	public function getAllAsesmen($id_mengajar, $id_siswa)
 	{
+		$this->db->order_by('aspek', 'ASC');
 		return $this->db->get_where('asesmen', [
 					'id_mengajar' => $id_mengajar, 
 					'id_siswa' => $id_siswa 
@@ -44,14 +45,20 @@ class Asesmen_model extends CI_Model
 
 	public function tambahAsesmen($id_mengajar, $id_siswa)
 	{
-		$data = [
-			'aspek' => $this->input->post('aspek', true),
-			'deskripsi' => $this->input->post('deskripsi', true),
-			'id_mengajar' => $id_mengajar,
-			'id_siswa' => $id_siswa
-		];
-
-		$this->db->insert('asesmen', $data);
+		$num = $this->input->post('num', true);
+		$i = 1;
+		while ($i <= $num) {
+			$data = [
+				'aspek' => $this->input->post('aspek', true),
+				'deskripsi' => $this->input->post('deskripsi' . $i, true),
+				'id_mengajar' => $id_mengajar,
+				'id_siswa' => $id_siswa
+			];
+	
+			$this->db->insert('asesmen', $data);
+			
+			$i++;
+		}
 	}
 
 	public function ubahAsesmen($id)
@@ -68,4 +75,5 @@ class Asesmen_model extends CI_Model
 	{
 		$this->db->delete('asesmen', ['id' => $id]);
 	}
+
 }

@@ -42,8 +42,18 @@
 <script src="<?= base_url() ?>assets/js/adminlte.min.js"></script>
 
 <script type="text/javascript">
-
-      new Chart(document.getElementById("chartjs-1"),
+      $(document).ready( function () {
+        $('#table_id').DataTable({
+          "responsive": true,
+          "autoWidth": false,
+          "paging": true,
+          "ordering": true,
+          "info": true,
+          });
+      } );
+    </script>
+  <script>
+    new Chart(document.getElementById("chartjs-1"),
         {
           "type":"bar",
 
@@ -77,76 +87,6 @@
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
       });
-
-      $(document).ready( function () {
-        $('#table_id').DataTable({
-          "responsive": true,
-          "autoWidth": false,
-          "paging": true,
-          "ordering": true,
-          "info": true,
-          });
-      } );
-      $(document).ready(function(){
-            $('#summernote').summernote({
-                height: "300px",
-                placeholder: 'Tulis Artikel...',
-            tabsize: 2,
-            height: 300,
-            toolbar: [
-              ['style', ['style']],
-              ['font', ['bold', 'italic', 'underline', 'clear']],
-              ['fontname', ['fontname']],
-              ['color', ['color']],
-              ['para', ['ul', 'ol', 'paragraph']],
-              ['height', ['height']],
-              ['table', ['table']],
-              ['insert', ['link', 'picture', 'hr']],
-              ['view', ['fullscreen', 'codeview']],
-              ['help', ['help']]
-            ],
-                callbacks: {
-                    onImageUpload: function(image) {
-                        uploadImage(image[0]);
-                    },
-                    onMediaDelete : function(target) {
-                        deleteImage(target[0].src);
-                    }
-                }
-            });
- 
-            function uploadImage(image) {
-                var data = new FormData();
-                data.append("image", image);
-                $.ajax({
-                    url: "<?php echo site_url('sisfo/berita/upload_image')?>",
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    type: "POST",
-                    success: function(url) {
-                        $('#summernote').summernote("insertImage", url);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            }
- 
-            function deleteImage(src) {
-                $.ajax({
-                    data: {src : src},
-                    type: "POST",
-                    url: "<?php echo site_url('sisfo/berita/delete_image')?>",
-                    cache: false,
-                    success: function(response) {
-                        console.log(response);
-                    }
-                });
-            }
- 
-        });
-    </script>
+  </script>
 </body>
 </html>

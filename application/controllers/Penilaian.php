@@ -11,10 +11,13 @@ class Penilaian extends CI_Controller
 		parent::__construct();
 		$this->load->model('sisfo/Penilaian_model');
 		$this->load->model('sisfo/Mengajar_model');
+		$this->load->model('sisfo/Dashboard_model');
 		$this->load->library('form_validation');
 		logged_in();
 		$this->data['user'] = user();
 		$this->data['menus'] = navMenu();
+		$this->data['statistik'] = $this->Dashboard_model->statistik();
+
 	}
 	public function index()
 	{

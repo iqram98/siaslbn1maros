@@ -77,7 +77,7 @@ class Siswa extends CI_Controller
 		$data['siswa'] = $this->Siswa_model->getSiswa($id);
 		$data['rombel'] = $this->Rombel_model->getAllRombel();
 		$data['gender'] = ['Laki-Laki', 'Perempuan'];
-		$data['tmpt_lahir'] = explode(" ", $data['user']['ttl']);
+		$data['tmpt_lahir'] = explode(" ", $data['siswa']['ttl']);
 		$data['tgl_lahir'] = date("Y-m-d", strtotime($data['tmpt_lahir'][1]));
 
 		$this->form_validation->set_rules('nama','Nama', 'required');

@@ -28,12 +28,12 @@
 					</div>
 					<div class="form-group">
 						<label for="tmpt_lahir">Tempat Lahir</label>
-						<input type="text" class="form-control" id="tmpt_lahir" name="tmpt_lahir" value="<?= $siswa['tmpt_lahir'] ?>">
+						<input type="text" class="form-control" id="tmpt_lahir" name="tmpt_lahir" value="<?= $tmpt_lahir[0]?>">
 						<small class="form-text text-danger"><?= form_error('tmpt_lahir') ?></small>
 					</div>
 					<div class="form-group">
 						<label for="tgl_lahir">Tanggal Lahir</label>
-						<input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $siswa['tgl_lahir'] ?>">
+						<input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $tgl_lahir ?>">
 						<small class="form-text text-danger"><?= form_error('tgl_lahir') ?></small>
 					</div>
 					<div class="form-group">

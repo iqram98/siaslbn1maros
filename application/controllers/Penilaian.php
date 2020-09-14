@@ -26,19 +26,21 @@ class Penilaian extends CI_Controller
 		$data['page'] = 'penilaian/index';
 		$data['rombelMapel'] = $this->Mengajar_model->getRombelMApel($data['user']['id']);
 
-		if ($this->input->post('refresh') == "submit") {
+		if ($this->input->get('refresh') == "s") {
 			$data['siswa'] = $this->Penilaian_model->getSiswa();
+			$data['r'] = $this->input->get('r');
 		} else {
 			$data['siswa'] = [];
 		}
 		$this->load->view('templates/wrapper', $data);
 	}
-	public function edit($id)
+	public function edit($id, $r)
 	{
 		$data = $this->data;
 		$data['judul'] = "Penilaian";
 		$data['page'] = 'penilaian/ubah';
 		$data['nilai'] = $this->Penilaian_model->getNilai($id);
+		$data['r'] = $r;
 
 		$this->form_validation->set_rules('u_tulis1','Nilai', 'numeric');
 		$this->form_validation->set_rules('u_tulis2','Nilai', 'numeric');
@@ -62,7 +64,7 @@ class Penilaian extends CI_Controller
 		} else {
 			$this->Penilaian_model->editNilai($id);
 			$this->session->set_flashdata('flash', 'Diedit');
-			redirect('penilaian');
+			redirect('penilaian?r='.$r.'&refresh=s');
 		}
 	}
 	public function print($id_mengajar)

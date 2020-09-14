@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<?php if ($this->session->flashdata('flash')): ?>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			Data Ruangan <strong>Berhasil! </strong><?= $this->session->flashdata('flash'); ?>
+			Data Nilai <strong>Berhasil! </strong><?= $this->session->flashdata('flash'); ?>
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
@@ -12,12 +12,12 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="clearfix">
-					<form action="" method="post">
+					<form action="" method="get">
 						
 						<div class="input-group">
 							
 							<div class="col-md-6">
-								<select class="form-control" id="rombelMapel" name="rombelMapel">
+								<select class="form-control" id="rombelMapel" name="r">
 									<option value="" disabled selected>Pilih Rombel - Mapel</option>
 									<?php foreach ($rombelMapel as $roma): ?>
 									<?php if ($this->input->post('refresh') == 'submit'): ?>
@@ -35,7 +35,7 @@
 							</div>
 							<div>
 								<span class="input-group-btn">
-									<button type="submit" name="refresh" value="submit" class="btn btn-primary">Refresh</button>
+									<button type="submit" name="refresh" value="s" class="btn btn-primary">Refresh</button>
 								</span>
 								<?php if (isset($_POST['rombelMapel'])): ?>
 									<span class="input-group-btn">
@@ -77,7 +77,7 @@
 							</td>
 							<td width="200">
 								<?php if (isset($sis['nilai_akhir'])): ?>
-								<a href="<?= base_url() ?>penilaian/edit/<?= $sis['id_nilai'] ?>"><span class="badge badge-warning">Edit Nilai</span></a>
+								<a href="<?= base_url() ?>penilaian/edit/<?= $sis['id_nilai'] ?>/<?= $r ?>"><span class="badge badge-warning">Edit Nilai</span></a>
 								<?php else: ?>
 								<a href="<?= base_url() ?>penilaian/edit/<?= $sis['id_nilai'] ?>"><span class="badge badge-primary">Tambah Nilai</span></a>
 								<?php endif ?>

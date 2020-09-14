@@ -7,7 +7,7 @@ class Penilaian_model extends CI_Model
 
 	public function getSiswa()
 	{
-		$roma = $this->input->post('rombelMapel');
+		$roma = $this->input->get('r');
 
 		$this->db->select('siswa.id, siswa.nama, siswa.nis, nilai.nilai_akhir, nilai.id as id_nilai');
 		$this->db->join('siswa', 'siswa.id = nilai.id_siswa', 'left');

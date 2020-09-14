@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				<button type="submit" name="ubah" class="btn btn-primary float-right">Edit Nilai</button>
-				<a href="<?= base_url('penilaian') ?>" type="button" class="btn btn-success float-right mr-3">Kembali</a>
+				<a href="<?= base_url('penilaian?r='.$r.'&refresh=s') ?>" type="button" class="btn btn-success float-right mr-3">Kembali</a>
 			</div>
 			<div class="col-md-6">
 				<div class="card card-info">

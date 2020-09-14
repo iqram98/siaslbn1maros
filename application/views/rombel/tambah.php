@@ -2,7 +2,6 @@
 	<div class="container-fluid">
 		<div class="card">
 			<div class="card-body col-md-6">
-				<?php var_dump($jurusan) ?>
 				<form action="" method="post" class="mt-5">
 					<div class="form-group">
 						<label for="nama_rombel">Nama Rombel</label>

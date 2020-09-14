@@ -43,7 +43,7 @@ class Ruangan extends CI_Controller
 		} else {
 			$this->Ruangan_model->tambahDataRuangan();
 			$this->session->set_flashdata('flash', 'Ditambahkan');
-			redirect('sisfo/ruangan');
+			redirect('ruangan');
 		}
 	}
 

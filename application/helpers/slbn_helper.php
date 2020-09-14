@@ -8,6 +8,7 @@ function navMenu()
     $ci->db->select('menu.*');
                   
 	$ci->db->join('user_access_menu', 'menu.id = user_access_menu.id_menu');
+	$ci->db->order_by('urut', 'ASC');
 	$menu = $ci->db->get_where('menu', ['user_access_menu.id_role' => $roleId])->result_array();
 
 	return $menu;

@@ -80,7 +80,7 @@ class Profil_model extends CI_Model
 		if (password_verify($this->input->post('passwordlama'), $user['password'])) {
 			if ($this->input->post('passwordbaru') == $this->input->post('passwordbaru1')) {
 				$data = [
-					'password' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT)
+					'password' => password_hash($this->input->post('passwordbaru', true), PASSWORD_DEFAULT)
 				];
 
 				$this->db->update('user', $data, ['id' => $id]);

@@ -44,13 +44,16 @@ class Siswa_model extends CI_Model
 				'nis' => $this->input->post('nis', true),
 				'jk' => $this->input->post('jk', true),
 				'ttl' => $ttl,
-				'id_rombel' => $this->input->post('id_rombel', true)
+				'id_rombel' => $this->input->post('id_rombel', true),
+				'nama_wali' => $this->input->post('nama_wali', true),
+				'hp_wali' => $this->input->post('hp_wali', true),
+				'id_user' => $id
 			];
 
 			$data1 = [
 				'id' => $id,
 				'username' => $this->input->post('nis', true),
-				'image' => 'default.jpg',
+				'image' => 'default1.jpg',
 				'password' => password_hash('siswaslbn1', PASSWORD_DEFAULT),
 				'id_role' => '4'
 			]; 
@@ -63,26 +66,48 @@ class Siswa_model extends CI_Model
 	public function ubahDataSiswa($id)
 	{
 		$userId = $this->db->get_where('siswa', ['id' => $id])->row_array()['id_user'];
+		$nislama = $this->db->get_where('siswa', ['id' => $id])->row_array()['nis'];
 		$ttlBaru = date("d-m-Y", strtotime($this->input->post('tgl_lahir', true)));
 		$ttl = $this->input->post('tmpt_lahir', true).' '.$ttlBaru;
-		$nis = $this->db->get_where('guru', ['nis' => $this->input->post('nis', true)])->row_array();
+		$nis = $this->db->get_where('siswa', ['nis' => $this->input->post('nis', true)])->row_array();
+		$nisbaru = $this->input->post('nis', true);
 
 		if ($nis) {
-			$this->session->set_flashdata('flash', 'NIS sudah terdaftar');
-			redirect('siswa/ubah/'.$id);
+			if($nislama != $nisbaru){
+				$this->session->set_flashdata('flash', 'NIS sudah terdaftar');
+				redirect('siswa/ubah/'.$id);	
+			} else {
+					$data = [
+						'nama' => $this->input->post('nama', true),
+						'nis' => $this->input->post('nis', true),
+						'jk' => $this->input->post('jk', true),
+						'ttl' => $ttl,
+						'id_rombel' => $this->input->post('id_rombel', true),
+						'nama_wali' => $this->input->post('nama_wali', true),
+						'hp_wali' => $this->input->post('hp_wali', true)
+					];
+					$data1 = [
+						'username' => $this->input->post('nis', true)
+					]; 
+		
+					$this->db->update('user', $data1, ['id' => $userId]);
+					$this->db->update('siswa', $data, ['id' => $id]);
+			}
 		} else {
 			$data = [
 				'nama' => $this->input->post('nama', true),
 				'nis' => $this->input->post('nis', true),
 				'jk' => $this->input->post('jk', true),
 				'ttl' => $ttl,
-				'id_rombel' => $this->input->post('id_rombel', true)
+				'id_rombel' => $this->input->post('id_rombel', true),
+				'nama_wali' => $this->input->post('nama_wali', true),
+				'hp_wali' => $this->input->post('hp_wali', true)
 			];
 			$data1 = [
-				'username' => $this->input->post('nip', true)
+				'username' => $this->input->post('nis', true)
 			]; 
 
-			$this->db->update('guru', $data, ['id' => $id]);
+			$this->db->update('user', $data1, ['id' => $userId]);
 			$this->db->update('siswa', $data, ['id' => $id]);
 		}
 	}

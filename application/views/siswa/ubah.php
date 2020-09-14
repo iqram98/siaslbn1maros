@@ -2,6 +2,14 @@
 	<div class="container-fluid">
 		<div class="card">
 			<div class="card-body col-md-6">
+					<?php if ($this->session->flashdata('flash')): ?>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<?= $this->session->flashdata('flash'); ?>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<?php endif ?>
 				<form action="" method="post" class="mt-5">
 					<div class="form-group">
 						<label for="nama">Nama Lengkap</label>
@@ -51,12 +59,12 @@
 					</div>
 					<div class="form-group">
 						<label for="nama_wali">Nama Wali</label>
-						<input type="date" class="form-control" id="nama_wali" name="nama_wali" value="<?= $siswa['nama_wali'] ?>">
+						<input type="text" class="form-control" id="nama_wali" name="nama_wali" value="<?= $siswa['nama_wali'] ?>">
 						<small class="form-text text-danger"><?= form_error('nama_wali') ?></small>
 					</div>
 					<div class="form-group">
 						<label for="hp_wali">No HP/ WA Wali</label>
-						<input type="date" class="form-control" id="hp_wali" name="hp_wali" value="<?= $siswa['hp_wali'] ?>">
+						<input type="text" class="form-control" id="hp_wali" name="hp_wali" value="<?= $siswa['hp_wali'] ?>">
 						<small class="form-text text-danger"><?= form_error('hp_wali') ?></small>
 					</div>
 					<button type="submit" name="ubah" class="btn btn-primary float-right">Ubah</button>

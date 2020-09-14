@@ -33,7 +33,7 @@
 							<td class="align-middle"><?= $gur['nama']; ?></td>
 							<td class="align-middle"><?= $gur['nip']; ?></td>
 							<td width="200" class="align-middle">
-								<a href="<?= base_url() ?>guru/detail/<?= $gur['id'] ?>""><span class="badge badge-primary">Detail</span></a>
+								<a href="<?= base_url() ?>guru/detail/<?= $gur['id'] ?>"><span class="badge badge-primary">Detail</span></a>
 								<a href="<?= base_url() ?>guru/ubah/<?= $gur['id'] ?>"><span class="badge badge-warning">Edit</span></a>
 								<a href="<?= base_url() ?>guru/hapus/<?= $gur['id'] ?>" onclick="return confirm('yakin?')"><span class="badge badge-danger">Hapus</span></a>
 							</td>

@@ -4,9 +4,9 @@
 			<div class="card-body col-md-6">
 				<form action="" method="post" class="mt-5">
 					<div class="form-group">
-						<label for="id_thn_ajar"></label>
+						<label for="id_thn_ajar">Tahun Ajar</label>
 						<select class="form-control" id="id_thn_ajar" name="id_thn_ajar">
-							<option value="" disabled selected>--Pilih Mapel--</option>
+							<option value="" disabled selected>--Pilih Tahun Ajar--</option>
 							<?php foreach ($thn_ajar as $thn): ?>
 							<option value="<?= $thn['id'] ?>"><?= $thn['thn_ajar'] ?></option>
 							<?php endforeach ?>

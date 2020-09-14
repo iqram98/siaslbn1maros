@@ -47,7 +47,7 @@ class Guru_model extends CI_Model
 		$data1 = [
 			'id' => $id,
 			'username' => $this->input->post('nip', true),
-			'image' => 'default.jpg',
+			'image' => 'default1.jpg',
 			'password' => password_hash('guruslbn1', PASSWORD_DEFAULT),
 			'id_role' => '3'
 		]; 
@@ -59,13 +59,37 @@ class Guru_model extends CI_Model
 	public function ubahDataGuru($id)
 	{
 		$userId = $this->db->get_where('guru', ['id' => $id])->row_array()['id_user'];
+		$niplama = $this->db->get_where('guru', ['id' => $id])->row_array()['nip'];
 		$ttlBaru = date("d-m-Y", strtotime($this->input->post('tgl_lahir', true)));
 		$ttl = $this->input->post('tmpt_lahir', true).' '.$ttlBaru;
-		$nip = $this->db->get_where('guru', ['nip' => $this->input->post('nip', true)])->row_array();
+		$nip = $this->db->get_where('guru', ['nip' => $this->input->post('nip', true)])->row_array()['nip'];
+		$nipbaru = $this->input->post('nip', true);
 
 		if ($nip) {
-			$this->session->set_flashdata('flash', 'NIP sudah terdaftar');
-			redirect('guru/ubah/'.$id);
+			if ($nipbaru != $niplama) {
+				$this->session->set_flashdata('flash', 'NIP sudah terdaftar');
+				redirect('guru/ubah/'.$id);	
+			} else {
+				$data = [
+					'nama' => $this->input->post('nama', true),
+					'nip' => $this->input->post('nip', true),
+					'jk' => $this->input->post('jk', true),
+					'ttl' => $ttl,
+					'pendidikan' => $this->input->post('pendidikan', true),
+					'pangkat' => $this->input->post('pangkat', true),
+					'jabatan' => $this->input->post('jabatan', true),
+					'tmt' => $this->input->post('tmt', true),
+					'no_hp' => $this->input->post('no_hp', true)
+				];
+
+				$data1 = [
+					'username' => $this->input->post('nip', true)
+				]; 
+
+				$this->db->update('guru', $data, ['id' => $id]);
+				$this->db->update('user', $data1, ['id' => $userId]);
+
+			}
 		} else {
 			$data = [
 				'nama' => $this->input->post('nama', true),
@@ -84,8 +108,7 @@ class Guru_model extends CI_Model
 			]; 
 
 			$this->db->update('guru', $data, ['id' => $id]);
-			$this->db->insert('user', $data1, ['id' => $userId]);
-
+			$this->db->update('user', $data1, ['id' => $userId]);
 		}
 	}
 

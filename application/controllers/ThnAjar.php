@@ -38,6 +38,7 @@ class ThnAjar extends CI_Controller
 		$data['page'] = 'thnAjar/tambah';
 
 		$this->form_validation->set_rules('thn_ajar','Tahun Ajar', 'required');
+		$this->form_validation->set_rules('semester','Semester', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('templates/wrapper', $data);
@@ -55,8 +56,11 @@ class ThnAjar extends CI_Controller
 		$data['judul'] = "Ubah Data Tahun Ajar";
 		$data['page'] = 'thnAjar/ubah';
 
-		$data['thn_ajar'] = $this->ThnAjar_model->getThnAjar($id);
-
+		$thnAjar = $this->ThnAjar_model->getThnAjar($id);
+		$pisah = explode(" ", $thnAjar);
+		$data['thn_ajar'] = $pisah[1];
+		$data['semester'] = $pisah[0];
+		$data['pilih'] = ["Ganjil", "Genap"];
 		$this->form_validation->set_rules('thn_ajar','Tahun Ajar', 'required');
 
 		if ($this->form_validation->run() == FALSE) {

@@ -1,6 +1,8 @@
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
+	<div class="card">
+				<div class="card-body">
 		<?php if ($this->session->flashdata('flash')): ?>
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			Data Admin <strong>Berhasil! </strong><?= $this->session->flashdata('flash'); ?>
@@ -55,5 +57,7 @@
 				<?php endforeach ?>
 			</tbody>
 		</table>
+		</div>
+		</div>
 	</div>
 </section>

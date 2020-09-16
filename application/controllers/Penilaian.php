@@ -28,12 +28,48 @@ class Penilaian extends CI_Controller
 
 		if ($this->input->get('refresh') == "s") {
 			$data['siswa'] = $this->Penilaian_model->getSiswa();
+			$id = $this->db->get('nilai')->row_array()['id'];
+			$data['lastId'] = $id + 1;
 			$data['r'] = $this->input->get('r');
 		} else {
 			$data['siswa'] = [];
 		}
 		$this->load->view('templates/wrapper', $data);
 	}
+
+	public function tambah($r, $id)
+	{
+		$data = $this->data;
+		$data['judul'] = "Penilaian";
+		$data['page'] = 'penilaian/tambah';
+		$data['r'] = $r;
+
+		$this->form_validation->set_rules('u_tulis1','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_tulis2','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_tulis3','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_lisan1','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_lisan2','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_lisan3','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_perbuatan1','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_perbuatan2','Nilai', 'numeric');
+		$this->form_validation->set_rules('u_perbuatan3','Nilai', 'numeric');
+		$this->form_validation->set_rules('tugas1','Nilai', 'numeric');
+		$this->form_validation->set_rules('tugas2','Nilai', 'numeric');
+		$this->form_validation->set_rules('tugas3','Nilai', 'numeric');
+		$this->form_validation->set_rules('uts_t','Nilai', 'numeric');
+		$this->form_validation->set_rules('uts_p','Nilai', 'numeric');
+		$this->form_validation->set_rules('uas_t','Nilai', 'numeric');
+		$this->form_validation->set_rules('uas_p','Nilai', 'numeric');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('templates/wrapper', $data);
+		} else {
+			$this->Penilaian_model->tambahNilai($r, $id);
+			$this->session->set_flashdata('flash', 'Diedit');
+			redirect('penilaian?r='.$r.'&refresh=s');
+		}
+	}
+
 	public function edit($id, $r)
 	{
 		$data = $this->data;

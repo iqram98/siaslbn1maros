@@ -16,7 +16,7 @@
 						
 						<div class="input-group">
 							
-							<div class="col-md-6">
+							<div class="col-md-6 mb-3">
 								<select class="form-control" id="rombelMapel" name="r">
 									<option value="" disabled selected>Pilih Rombel - Mapel</option>
 									<?php foreach ($rombelMapel as $roma): ?>
@@ -76,10 +76,10 @@
 								?>
 							</td>
 							<td width="200">
-								<?php if (isset($sis['nilai_akhir'])): ?>
+								<?php if (isset($sis['id_nilai'])): ?>
 								<a href="<?= base_url() ?>penilaian/edit/<?= $sis['id_nilai'] ?>/<?= $r ?>"><span class="badge badge-warning">Edit Nilai</span></a>
 								<?php else: ?>
-								<a href="<?= base_url() ?>penilaian/edit/<?= $sis['id_nilai'] ?>"><span class="badge badge-primary">Tambah Nilai</span></a>
+								<a href="<?= base_url() ?>penilaian/tambah/<?= $r ?>/<?= $sis['id'] ?> "><span class="badge badge-primary">Tambah Nilai</span></a>
 								<?php endif ?>
 							</td>
 						</tr>

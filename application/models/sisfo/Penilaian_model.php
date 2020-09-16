@@ -9,9 +9,16 @@ class Penilaian_model extends CI_Model
 	{
 		$roma = $this->input->get('r');
 
-		$this->db->select('siswa.id, siswa.nama, siswa.nis, nilai.nilai_akhir, nilai.id as id_nilai');
-		$this->db->join('siswa', 'siswa.id = nilai.id_siswa', 'left');
-		$siswa = $this->db->get_where('nilai', ['id_mengajar' => $roma])->result_array();
+		$rombel = $this->db->get_where('mengajar', ['id' => $roma])->row_array()['id_rombel'];
+	
+		$this->db->select('siswa.id, siswa.nama, siswa.nis, siswa.id_rombel, nilai.id as id_nilai, nilai.id_mengajar, nilai.nilai_akhir');
+		$this->db->join('nilai', 'siswa.id = nilai.id_siswa', 'left');
+		$where = "siswa.id_rombel = $rombel AND (nilai.id_mengajar=$roma OR nilai.id_mengajar IS NULL)";
+		$this->db->where($where);
+
+		$siswa = $this->db->get_where('siswa')->result_array();
+
+
 		return $siswa;
 		
 	}
@@ -63,6 +70,41 @@ class Penilaian_model extends CI_Model
 
 	}
 
+	public function tambahNilai($r, $id)
+	{
+		$data = [
+			'u_tulis1' => $this->input->post('u_tulis1'),
+			'u_tulis2' => $this->input->post('u_tulis2'),
+			'u_tulis3' => $this->input->post('u_tulis3'),
+			'rata_tulis' => $this->input->post('rata_tulis'),
+			'u_lisan1' => $this->input->post('u_lisan1'),
+			'u_lisan2' => $this->input->post('u_lisan2'),
+			'u_lisan3' => $this->input->post('u_lisan3'),
+			'rata_lisan' => $this->input->post('rata_lisan'),
+			'u_perbuatan1' => $this->input->post('u_perbuatan1'),
+			'u_perbuatan2' => $this->input->post('u_perbuatan2'),
+			'u_perbuatan3' => $this->input->post('u_perbuatan3'),
+			'rata_perbuatan' => $this->input->post('rata_perbuatan'),
+			'rata_ulhar' => $this->input->post('rata_ulhar'),
+			'tugas1' => $this->input->post('tugas1'),
+			'tugas2' => $this->input->post('tugas2'),
+			'tugas3' => $this->input->post('tugas3'),
+			'rata_tugas' => $this->input->post('rata_tugas'),
+			'uts_t' => $this->input->post('uts_t'),
+			'uts_p' => $this->input->post('uts_p'),
+			'rata_uts' => $this->input->post('rata_uts'),
+			'uas_t' => $this->input->post('uas_t'),
+			'uas_p' => $this->input->post('uas_p'),
+			'rata_uas' => $this->input->post('rata_uas'),
+			'nilai_akhir' => $this->input->post('nilai_akhir'),
+			'nilai_rapor' => $this->input->post('nilai_rapor'),
+			'id_mengajar' => $r,
+			'id_siswa' => $id
+		];
+
+		$this->db->insert('nilai', $data);
+	}
+
 
 
 	public function editNilai($id)
@@ -85,11 +127,12 @@ class Penilaian_model extends CI_Model
 			$rata_tulis = $u_tulis2;
 		} elseif ($u_tulis2 == NULL && $u_tulis3 == NULL) {
 			$rata_tulis = $u_tulis1;
-		} elseif ($u_tulis1 != NULL && $u_tulis2 != NULL && $u_tulis3 != NULL) {
+		} elseif ($u_tulis1 == NULL && $u_tulis2 == NULL && $u_tulis3 == NULL) {
 			$rata_tulis = NULL;
 		} else {
 			$rata_tulis = ($u_tulis1 + $u_tulis2 + $u_tulis3)/ 3;
 		}
+
 		/*~Rata- Rata Ulangan Tulis~*/
 
 		$u_lisan1 = !empty($this->input->post('u_lisan1', true)) ? $this->input->post('u_lisan1', true) : NULL;
@@ -109,11 +152,12 @@ class Penilaian_model extends CI_Model
 			$rata_lisan = $u_lisan2;
 		} elseif ($u_lisan2 == NULL && $u_lisan3 == NULL) {
 			$rata_lisan = $u_lisan1;
-		} elseif ($u_lisan1 != NULL && $u_lisan2 != NULL && $u_lisan3 != NULL) {
+		} elseif ($u_lisan1 == NULL && $u_lisan2 == NULL && $u_lisan3 == NULL) {
 			$rata_lisan = NULL;
 		} else {
 			$rata_lisan = ($u_lisan1 + $u_lisan2 + $u_lisan3)/ 3;
 		}
+
 		/*~Rata- Rata Ulangan Lisan~*/
 
 		$u_perbuatan1 = !empty($this->input->post('u_perbuatan1', true)) ? $this->input->post('u_perbuatan1', true) : NULL;
@@ -133,11 +177,12 @@ class Penilaian_model extends CI_Model
 			$rata_perbuatan = $u_perbuatan2;
 		} elseif ($u_perbuatan2 == NULL && $u_perbuatan3 == NULL) {
 			$rata_perbuatan = $u_perbuatan1;
-		} elseif ($u_perbuatan1 != NULL && $u_perbuatan2 != NULL && $u_perbuatan3 != NULL) {
+		} elseif ($u_perbuatan1 == NULL && $u_perbuatan2 == NULL && $u_perbuatan3 == NULL) {
 			$rata_perbuatan = NULL;
 		} else {
 			$rata_perbuatan = ($u_perbuatan1 + $u_perbuatan2 + $u_perbuatan3)/ 3;
 		}
+
 		/*~Rata- Rata Ulangan Perbuatan~*/
 
 		/*Rata- Rata Ulangan Harian*/
@@ -160,11 +205,12 @@ class Penilaian_model extends CI_Model
 			$rata_tugas = $tugas2;
 		} elseif ($tugas2 == NULL && $tugas3 == NULL) {
 			$rata_tugas = $tugas1;
-		} elseif ($tugas1 != NULL && $tugas2 != NULL && $tugas3 != NULL) {
+		} elseif ($tugas1 == NULL && $tugas2 == NULL && $tugas3 == NULL) {
 			$rata_tugas = NULL;
 		} else {
 			$rata_tugas = ($tugas1 + $tugas2 + $tugas3)/ 3;
 		}
+
 		/*~Rata- Rata Tugas~*/
 
 		$uts_t = !empty($this->input->post('uts_t', true)) ? $this->input->post('uts_t', true) : NULL;
@@ -175,11 +221,12 @@ class Penilaian_model extends CI_Model
 			$rata_uts = $uts_p;
 		} elseif ($uts_t != NULL && $uts_p == NULL) {
 			$rata_uts = $uts_t;
-		} elseif ($uts_t != NULL && $uts_p != NULL) {
+		} elseif ($uts_t == NULL && $uts_p == NULL) {
 			$rata_uts = NULL;
 		} else {
 			$rata_uts = ($uts_t + $uts_p)/ 2;
 		}
+
 		/*~Rata- Rata UTS~*/
 
 		$uas_t = !empty($this->input->post('uas_t', true)) ? $this->input->post('uas_t', true) : NULL;
@@ -190,15 +237,17 @@ class Penilaian_model extends CI_Model
 			$rata_uas = $uas_p;
 		} elseif ($uas_t != NULL && $uas_p == NULL) {
 			$rata_uas = $uas_t;
-		} elseif ($uas_t != NULL && $uas_p != NULL) {
+		} elseif ($uas_t == NULL && $uas_p == NULL) {
 			$rata_uas = NULL;
 		} else {
 			$rata_uas = ($uas_t + $uas_p)/ 2;
 		}
+
 		/*~Rata- Rata UAS~*/
 
 		$nilai_akhir = ($rata_ulhar + $rata_tugas + $rata_uts + ($rata_uas*2))/ 5;
 		$nilai_rapor = round($nilai_akhir, 0, PHP_ROUND_HALF_UP);
+
 
 		$data = [
 			'u_tulis1' => $u_tulis1,

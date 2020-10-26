@@ -37,9 +37,9 @@
 								<span class="input-group-btn">
 									<button type="submit" name="refresh" value="s" class="btn btn-primary">Refresh</button>
 								</span>
-								<?php if (isset($_POST['rombelMapel'])): ?>
+								<?php if ($this->input->get('r')): ?>
 									<span class="input-group-btn">
-										<a href="penilaian/print/<?= $_POST['rombelMapel'] ?>" class="btn btn-success">Print</a>
+										<a href="penilaian/printNilai/<?= $this->input->get('r') ?>" class="btn btn-success">Print</a>
 									</span>
 								<?php endif ?>
 							</div>
@@ -81,6 +81,7 @@
 								<?php else: ?>
 								<a href="<?= base_url() ?>penilaian/tambah/<?= $r ?>/<?= $sis['id'] ?> "><span class="badge badge-primary">Tambah Nilai</span></a>
 								<?php endif ?>
+								<a href="<?= base_url() ?>penilaian/detailSiswa/<?= $r ?>/<?= $sis['id'] ?>"><span class="badge badge-success">Detail</span></a>
 							</td>
 						</tr>
 						<?php $no++ ?>

@@ -174,7 +174,7 @@ class Asesmen extends CI_Controller
 		<table class="tableisi" style="text-align: center;" border="1" cellpadding="5" cellspacing="0">
 			<tr>
 				<td>No</td>
-				<td>Aspek/ Kompetensi</td>
+				<td colspan="2">Aspek/ Kompetensi</td>
 				<td>Deskripsi</td>
 			</tr>';
 			$a = 1;
@@ -182,11 +182,16 @@ class Asesmen extends CI_Controller
 				$aspekIsi = $aspek[$i];
 				$html .= '<tr>';
 				if ($arr[$aspekIsi]['printed'] == 'no') {
+					$aspeks = explode(" ", $aspekIsi);
+					$num = $aspeks[0];
+					unset($aspeks[0]);
+					$aspek = implode(" ", $aspeks);
 					$html .= "<td rowspan='" . $arr[$aspekIsi]['rowspan'] . "'>" . $a++."</td>";
-					$html .= "<td width='300' rowspan='" . $arr[$aspekIsi]['rowspan'] . "'>" . $aspekIsi."</td>";
+					$html .= "<td width='30' style='border-right:none' rowspan='" . $arr[$aspekIsi]['rowspan'] . "'>" . $num."</td>";
+					$html .= "<td width='300' style='border-left:none' align='left' rowspan='" . $arr[$aspekIsi]['rowspan'] . "'>" . $aspek."</td>";
 					$arr[$aspekIsi]['printed'] = 'yes';
 				}
-				$html .= '<td width="400">' . $deskripsi[$i] . '</td>';
+				$html .= '<td width="400" align="left">' . '- '. $deskripsi[$i] . '</td>';
 				$html .= '</tr>';
 			}
 
@@ -196,7 +201,7 @@ class Asesmen extends CI_Controller
 			<tr>
 				<td></td>
 				<td width="500"></td>
-				<td width="200" align="right">Maros, 12 Agustus 2020</td>
+				<td width="200" align="right">Maros, 		 2020</td>
 			</tr>
 			<tr>
 				<td width="200">Mengetahui</td>
@@ -214,12 +219,12 @@ class Asesmen extends CI_Controller
 				<td></td>
 			</tr>
 			<tr>
-				<td>MAHYUDDIN, S.Pd. M.Pd.</td>
+				<td>MAHYUDDIN, S.Pd.,M.M.</td>
 				<td></td>
 				<td>' . strtoupper($user["nama"]) . '</td>
 			</tr>
 			<tr>
-				<td>NIP. xxxxxxxxxxxxx</td>
+				<td>NIP. 197202072007011020</td>
 				<td></td>
 				<td>NIP. ' . $user["nip"] . '</td>
 			</tr>

@@ -34,13 +34,14 @@ class Auth_model extends CI_Model
 				$this->session->set_userdata($data);
 				redirect('dashboard');
 				} elseif ($user['id_role'] == 4) {
-					$guru = $this->db->get_where('siswa', ['id_user' => $user['id']])->row_array();
+					$siswa = $this->db->get_where('siswa', ['id_user' => $user['id']])->row_array();
 
 					$data = [
-					'username' => $guru['nama'],
-					'names' => $guru['nis'],
+					'username' => $siswa['nama'],
+					'names' => $siswa['nis'],
 					'level' => $user['id_role']
 				];
+				
 
 				$this->session->set_userdata($data);
 				redirect('dashboard');

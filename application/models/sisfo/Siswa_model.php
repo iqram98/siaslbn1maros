@@ -45,6 +45,7 @@ class Siswa_model extends CI_Model
 				'jk' => $this->input->post('jk', true),
 				'ttl' => $ttl,
 				'id_rombel' => $this->input->post('id_rombel', true),
+				'alamat' => $this->input->post('alamat', true),
 				'nama_wali' => $this->input->post('nama_wali', true),
 				'hp_wali' => $this->input->post('hp_wali', true),
 				'id_user' => $id
@@ -83,6 +84,7 @@ class Siswa_model extends CI_Model
 						'jk' => $this->input->post('jk', true),
 						'ttl' => $ttl,
 						'id_rombel' => $this->input->post('id_rombel', true),
+						'alamat' => $this->input->post('alamat', true),
 						'nama_wali' => $this->input->post('nama_wali', true),
 						'hp_wali' => $this->input->post('hp_wali', true)
 					];

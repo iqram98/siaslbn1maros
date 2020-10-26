@@ -58,6 +58,11 @@
 						<small class="form-text text-danger"><?= form_error('id_rombel') ?></small>
 					</div>
 					<div class="form-group">
+						<label for="alamat">Alamat</label>
+						<input type="text" class="form-control" id="alamat" name="alamat" value="<?= $siswa['alamat'] ?>">
+						<small class="form-text text-danger"><?= form_error('alamat') ?></small>
+					</div>
+					<div class="form-group">
 						<label for="nama_wali">Nama Wali</label>
 						<input type="text" class="form-control" id="nama_wali" name="nama_wali" value="<?= $siswa['nama_wali'] ?>">
 						<small class="form-text text-danger"><?= form_error('nama_wali') ?></small>

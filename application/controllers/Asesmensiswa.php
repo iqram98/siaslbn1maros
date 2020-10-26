@@ -28,7 +28,7 @@ class Asesmensiswa extends CI_Controller
 
 		$this->load->view('templates/wrapper', $data);
 	}
-	public function list($id)
+	public function listAsesmen($id)
 	{
 		$data = $this->data;
 

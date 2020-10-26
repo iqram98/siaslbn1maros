@@ -16,7 +16,7 @@
 							<?php foreach ($rombelMapel as $roma): ?>
 								<tr>
 									<td><?= $no ?></td>
-									<td><a href="<?= base_url() ?>asesmensiswa/list/<?= $roma['id'] ?>"><?= $roma['roma'] ?></a></td>
+									<td><a href="<?= base_url() ?>asesmensiswa/listAsesmen/<?= $roma['id'] ?>"><?= $roma['roma'] ?></a></td>
 								</tr>
 							<?php $no++ ?>
 							<?php endforeach ?>

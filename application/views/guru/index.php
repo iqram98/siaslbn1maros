@@ -32,10 +32,13 @@
 							<td class="align-middle"><img src="<?= base_url() ?>assets/img/<?= $gur['image']; ?>" class="img-thumbnail" width=80></td>
 							<td class="align-middle"><?= $gur['nama']; ?></td>
 							<td class="align-middle"><?= $gur['nip']; ?></td>
+								
 							<td width="200" class="align-middle">
 								<a href="<?= base_url() ?>guru/detail/<?= $gur['id'] ?>"><span class="badge badge-primary">Detail</span></a>
+							<?php if ($this->session->userdata('level') == '1' || $this->session->userdata('level') == '2'): ?>
 								<a href="<?= base_url() ?>guru/ubah/<?= $gur['id'] ?>"><span class="badge badge-warning">Edit</span></a>
 								<a href="<?= base_url() ?>guru/hapus/<?= $gur['id'] ?>" onclick="return confirm('yakin?')"><span class="badge badge-danger">Hapus</span></a>
+							<?php endif ?>
 							</td>
 						</tr>
 						<?php $no++ ?>

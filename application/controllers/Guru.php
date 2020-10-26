@@ -44,7 +44,7 @@ class Guru extends CI_Controller
 		$data['page'] = 'guru/tambah';
 
 		$this->form_validation->set_rules('nama','Nama', 'required');
-		$this->form_validation->set_rules('nip','NIP', 'required|numeric');
+		$this->form_validation->set_rules('nip','NIP', 'required');
 		$this->form_validation->set_rules('jk','Jenis Kelamin', 'required');
 		$this->form_validation->set_rules('tmpt_lahir','Tempat Lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir','Tanggal Lahir', 'required');
@@ -52,7 +52,7 @@ class Guru extends CI_Controller
 		$this->form_validation->set_rules('pangkat','Pangkat', 'required');
 		$this->form_validation->set_rules('jabatan','Jabatan', 'required');
 		$this->form_validation->set_rules('tmt','TMT', 'required');
-		$this->form_validation->set_rules('no_hp','TMT', 'required|numeric');
+		$this->form_validation->set_rules('no_hp','TMT', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('templates/wrapper', $data);
@@ -74,7 +74,7 @@ class Guru extends CI_Controller
 		$data['tgl_lahir'] = date("Y-m-d", strtotime($data['tmpt_lahir'][1]));
 
 		$this->form_validation->set_rules('nama','Nama', 'required');
-		$this->form_validation->set_rules('nip','NIP', 'required|numeric');
+		$this->form_validation->set_rules('nip','NIP', 'required');
 		$this->form_validation->set_rules('jk','Jenis Kelamin', 'required');
 		$this->form_validation->set_rules('tmpt_lahir','Tempat Lahir', 'required');
 		$this->form_validation->set_rules('tgl_lahir','Tanggal Lahir', 'required');
@@ -82,7 +82,7 @@ class Guru extends CI_Controller
 		$this->form_validation->set_rules('pangkat','Pangkat', 'required');
 		$this->form_validation->set_rules('jabatan','Jabatan', 'required');
 		$this->form_validation->set_rules('tmt','TMT', 'required');
-		$this->form_validation->set_rules('no_hp','TMT', 'required|numeric');
+		$this->form_validation->set_rules('no_hp','No Hp', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('templates/wrapper', $data);

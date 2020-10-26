@@ -23,16 +23,13 @@
                                 <b>Tempat, Tanggal Lahir</b> <a class="float-right"><?= $siswa['ttl'] ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b>Alamat</b> <a class="float-right"><?= $siswa['alamat'] ?></a>
-                            </li>
-                            <li class="list-group-item">
                                 <b>Nama Orang Tua/ Wali</b> <a class="float-right"><?= $siswa['nama_wali'] ?></a>
                             </li>
                             <li class="list-group-item">
                                 <b>No HP/ WA Wali</b> <a class="float-right"><?= $siswa['hp_wali'] ?></a>
                             </li>
                         </ul>
-                        <a href="<?= base_url('siswa') ?>" type="button" class="btn btn-success float-right mr-3">Kembali</a>
+                        <a href="<?= base_url('penilaian?r='.$r.'&refresh=s') ?>" type="button" class="btn btn-success float-right mr-3">Kembali</a>
                     </div>
                 </div>
             </div>

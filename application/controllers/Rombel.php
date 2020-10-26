@@ -77,6 +77,6 @@ class Rombel extends CI_Controller
 	{
 		$this->Rombel_model->hapusDataRombel($id);
 		$this->session->set_flashdata('flash', 'Dihapus');
-		redirect('sisfo/rombel');
+		redirect('rombel');
 	}
 }

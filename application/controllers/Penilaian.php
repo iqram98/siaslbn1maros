@@ -10,6 +10,7 @@ class Penilaian extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('sisfo/Penilaian_model');
+		$this->load->model('sisfo/Siswa_model');
 		$this->load->model('sisfo/Mengajar_model');
 		$this->load->model('sisfo/Dashboard_model');
 		$this->load->library('form_validation');
@@ -34,6 +35,19 @@ class Penilaian extends CI_Controller
 		} else {
 			$data['siswa'] = [];
 		}
+		$this->load->view('templates/wrapper', $data);
+	}
+
+	public function detailSiswa($r, $id)
+	{
+		$data = $this->data;
+
+		$data['judul'] = 'Detail Data Siswa';
+		$data['page'] = 'penilaian/detailSiswa';
+		$data['r'] = $r;
+
+		$data['siswa'] = $this->Siswa_model->getSiswa($id);
+
 		$this->load->view('templates/wrapper', $data);
 	}
 
@@ -103,7 +117,7 @@ class Penilaian extends CI_Controller
 			redirect('penilaian?r='.$r.'&refresh=s');
 		}
 	}
-	public function print($id_mengajar)
+	public function printNilai($id_mengajar)
 	{
 		$user = $this->data['user'];
 		$nilais = $this->Penilaian_model->printNilai($id_mengajar);
@@ -235,15 +249,15 @@ class Penilaian extends CI_Controller
 				</tr>
 				<tr>
 						<td></td>
-						<td>IQRAM NUGRAHA</td>
+						<td>MAHYUDDIN, S.Pd.,M.M.</td>
 						<td></td>
 						<td>'. strtoupper($user["nama"]) .'</td>
 				</tr>
 				<tr>
 						<td></td>
-						<td>NIP. 1629042024</td>
+						<td>NIP. 197202072007011020</td>
 						<td></td>
-						<td>'. $user["nip"] .'</td>
+						<td>NIP. ' . $user["nip"] . '</td>
 				</tr>
 		</table>
 </body>';

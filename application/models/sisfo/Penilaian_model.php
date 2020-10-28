@@ -60,10 +60,11 @@ class Penilaian_model extends CI_Model
 
 	public function printData($id)
 	{
-		$this->db->select('thn_ajar.thn_ajar, rombel.nama_rombel, mapel.nama_mapel');
+		$this->db->select('thn_ajar.thn_ajar, rombel.nama_rombel, mapel.nama_mapel, jurusan.nama_jurusan');
 		$this->db->join('thn_ajar', 'thn_ajar.id = mengajar.id_thn_ajar');
 		$this->db->join('rombel', 'rombel.id = mengajar.id_rombel');
 		$this->db->join('mapel', 'mapel.id = mengajar.id_mapel');
+		$this->db->join('jurusan', 'jurusan.id = rombel.id_jurusan');
 		$data = $this->db->get_where('mengajar', ['mengajar.id' => $id])->row_array();
 		
 		return $data;

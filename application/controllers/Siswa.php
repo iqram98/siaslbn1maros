@@ -6,6 +6,8 @@
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
 	use PhpOffice\PhpSpreadsheet\Reader\Csv;
 	use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+	use Dompdf\Dompdf;
+
 class Siswa extends CI_Controller
 {
  
@@ -183,5 +185,58 @@ class Siswa extends CI_Controller
 		    $this->session->set_flashdata('flash', 'Diimport');
 			redirect('siswa');
 		}
+	}
+	public function printDataSiswa()
+	{
+		//Ambil Data
+		$this->db->select('siswa.*, rombel.nama_rombel, user.image');
+		$this->db->from('siswa');
+		$this->db->join('rombel', 'rombel.id = siswa.id_rombel');
+		$this->db->join('user', 'user.id = siswa.id_user');
+		$datas = $this->db->get()->result_array();
+
+		$html = '<h3 align="center">DATA SISWA SLBN 1 MAROS</h3>
+		<br>';
+		$html .= '<table style="text-align: center;" border="1" cellpadding="5" cellspacing="0">
+					<thead>
+						<tr>
+							<th scope="col">No</th>
+							<th scope="col">Nama</th>
+							<th scope="col">NIS</th>
+							<th scope="col">Jenis Kelamin</th>
+							<th scope="col">TTL</th>
+							<th scope="col">Alamat</th>
+							<th scope="col">Rombel</th>
+						</tr>
+					</thead>
+					<tbody>';
+						$no = '1';
+						foreach ($datas as $data) {
+						$html .= '<tr>
+							<td>'. $no++ .'</td>
+							<td>'. $data['nama']  .'</td>
+							<td>'. $data['nis'] .'</td>
+							<td>'. $data['jk'] .'</td>
+							<td>'. $data['ttl'] .'</td>
+							<td>'. $data['alamat'] .'</td>
+							<td>'. $data['nama_rombel'] .'</td>
+
+						</tr>';
+
+						}
+					$html .= '</tbody>
+				</table>';
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'landscape');
+
+		// Render the HTML as PDF
+		$dompdf->render();
+
+		// Output the generated PDF to Browser
+		$dompdf->stream('Data_Siswa');
 	}
 }

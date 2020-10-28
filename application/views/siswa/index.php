@@ -10,8 +10,11 @@
 		</div>
 		<?php endif ?>
 		<div class="clearfix">
+			<?php if ($this->session->userdata('level') == '1' || $this->session->userdata('level') == '2'): ?>
 			<a class="btn btn-primary mb-3 float-right" href="<?= base_url() ?>siswa/tambah">Tambah Siswa</a>
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Import Siswa</button>
+			<?php endif ?>
+			<a class="btn btn-primary mb-3 mr-3 float-right" href="<?= base_url() ?>siswa/printDataSiswa">Print Data Siswa</a>
 		</div>
 		<div class="card">
 			<div class="card-body">

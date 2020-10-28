@@ -12,7 +12,10 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="clearfix">
+					<?php if ($this->session->userdata('level') == '1' || $this->session->userdata('level') == '2'): ?>
 					<a class="btn btn-primary mb-3 float-right" href="<?= base_url() ?>guru/tambah">Tambah Guru</a>
+					<?php endif ?>
+					<a class="btn btn-primary mb-3 mr-3 float-right" href="<?= base_url() ?>guru/printDataGuru">Print Data Guru</a>
 				</div>
 				<table id="table_id" class="table">
 					<thead>

@@ -2,6 +2,7 @@
 /**
 *
 */
+use Dompdf\Dompdf;
 class Penilaian extends CI_Controller
 {
 	var $data;
@@ -125,8 +126,8 @@ class Penilaian extends CI_Controller
 		$semesters = explode(" ", $data['thn_ajar']);
 		$semester = strtoupper($semesters[0]);
 		$thn_ajar = $semesters[1];
-		$kelas = explode(" ", $data['nama_rombel']);
-		$kelas = $kelas[1]. '/' . $kelas[2];
+		$kelas = $data['nama_rombel'];
+		$jurusan = $data['nama_jurusan'];
 
 		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [330, 215]]);
 		$html = '<body>
@@ -139,7 +140,7 @@ class Penilaian extends CI_Controller
 				<tr>
 						<td>Kelas/ Jurusan</td>
 						<td>:</td>
-						<td>'. $kelas .'</td>
+						<td>'. $kelas .'/ '.$jurusan.'</td>
 				</tr>
 				<tr>
 						<td>Tahun Pelajaran</td>

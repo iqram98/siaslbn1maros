@@ -114,8 +114,9 @@ class Asesmen extends CI_Controller
 		$user = $this->data['user'];
 		$asesmen = $this->Asesmen_model->getAllAsesmen($id_mengajar, $id_siswa);
 		$roma = $this->Mengajar_model->getRombelMapelSatu($id_mengajar);
-		$rombel = explode(" - ", $roma)[0];
+		$rombel = explode(" - ", $roma);
 		$mapel = $rombel[1];
+		$rombel = $rombel[0];
 		$siswa = $this->Siswa_model->getSiswa($id_siswa);
 
 		$aspek = [];
